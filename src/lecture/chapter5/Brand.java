@@ -14,4 +14,14 @@ public enum Brand {
     public String getPriceTag(){
         return priceTag;
     }
+
+    @Override
+    public String toString(){
+     return switch(this){
+       case MERCEDES -> "Mercedes";
+       case TESLA -> "Tesla";
+       case FIAT -> "FIAT";
+       case OPEL -> "Opel";
+     };
+    }
 }
