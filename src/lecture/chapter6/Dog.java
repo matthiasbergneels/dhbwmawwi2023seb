@@ -1,6 +1,6 @@
 package lecture.chapter6;
 
-public class Dog extends Animal{
+public final class Dog extends Animal{
 
   private String breed;
 
@@ -12,6 +12,12 @@ public class Dog extends Animal{
   public void bark(){
     System.out.println("Der Hund " + getDescription() + " bellt! *wuff*");
   }
+
+  @Override
+  public void breath() {
+    System.out.println("Der Hund " + getDescription() + "atmet!");
+  }
+
   @Override
   public void eat(){
     super.eat();

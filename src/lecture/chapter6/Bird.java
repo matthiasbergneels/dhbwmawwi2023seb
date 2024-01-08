@@ -20,4 +20,9 @@ public class Bird extends Animal{
   public void setCanFly(boolean canFly) {
     this.canFly = canFly;
   }
+
+  @Override
+  public void breath() {
+      System.out.println("Der Vogel " + getDescription() + "atmet!");
+  }
 }
