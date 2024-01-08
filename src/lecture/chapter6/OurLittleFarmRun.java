@@ -61,7 +61,21 @@ public class OurLittleFarmRun {
       currentAnimal.move();
 
       System.out.println(currentAnimal.toString());
+
       //currentAnimal.bark();
+      if(currentAnimal instanceof Dog){
+        // Widening Cast
+        Dog currentDog = (Dog)currentAnimal;
+        currentDog.bark();
+      } else {
+        System.out.println("Kein Hund!");
+      }
+
+      // Prüfung durch instanceof und widening cast bei "true"
+      if(currentAnimal instanceof Bird currentBird){
+        currentBird.tweet();
+      }
+
     }
 
   }
