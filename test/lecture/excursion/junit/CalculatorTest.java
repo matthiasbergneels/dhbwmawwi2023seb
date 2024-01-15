@@ -1,6 +1,9 @@
 package lecture.excursion.junit;
 
+import lecture.excursion.junit.Calculator;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 //import static org.junit.jupiter.api.Assertions.*;
 
@@ -126,5 +129,32 @@ class CalculatorTest {
       // Assert
       Assertions.assertEquals(-5.0, result);
     }
+  }
+
+  @Nested
+  @DisplayName("Mulitpy Test Cases")
+  class MultiplyTestCases{
+
+    @ParameterizedTest(name="{0} multiplied with {1} should result in {2}")
+    @DisplayName("multiply Test - paramterized")
+    @CsvSource({
+      "10.0, 10.0, 100.0",
+      "0.0, 100.0, 0.0",
+      "-1.0, 100.0, -100.0",
+      "1, 1, 1.0"
+    })
+    void multiply(double numberA, double numberB, double expectedResult){
+      System.out.println("Test - multiply");
+      // Arrange
+      // Nothing to do
+
+      // Act
+      double result = testCalculator.multiply(numberA, numberB);
+
+      // Assert
+      Assertions.assertEquals(expectedResult, result);
+
+    }
+
   }
 }
