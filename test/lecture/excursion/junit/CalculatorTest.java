@@ -3,7 +3,14 @@ package lecture.excursion.junit;
 import lecture.excursion.junit.Calculator;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //import static org.junit.jupiter.api.Assertions.*;
 
@@ -144,7 +151,7 @@ class CalculatorTest {
       "1, 1, 1.0"
     })
     void multiply(double numberA, double numberB, double expectedResult){
-      System.out.println("Test - multiply");
+      System.out.println("Test - multiply - csv source");
       // Arrange
       // Nothing to do
 
@@ -153,8 +160,35 @@ class CalculatorTest {
 
       // Assert
       Assertions.assertEquals(expectedResult, result);
-
     }
 
+    @ParameterizedTest(name = "{0} multiplied with {1} should result in {2}")
+    @DisplayName("Multiply Test Case - parameterized by Source CSV-File")
+    @CsvFileSource(resources = "/multiplyTestCases.csv")
+    void multiplyParamterized(double numberA, double numberB, double expectedResult) {
+      System.out.println("Test - multiply - csv file source");
+      double result = testCalculator.multiply(numberA, numberB);
+
+      assertEquals(expectedResult, result);
+    }
+
+    @ParameterizedTest(name = "{0} multiplied with {1} should result in {2}")
+    @DisplayName("Multiply Test Case - parameterized by Source Method")
+    @MethodSource("lecture.excursion.junit.CalculatorTest#provideMultiplyTestCases")
+    void multiplyParamterizedWithMethod(double numberA, double numberB, double expectedResult) {
+      System.out.println("Test - multiply - method source");
+      double result = testCalculator.multiply(numberA, numberB);
+
+      assertEquals(expectedResult, result);
+    }
+  }
+
+
+  static Stream provideMultiplyTestCases(){
+    return Stream.of(
+      Arguments.of(10.0, 10.0, 100.0),
+      Arguments.of(5.0, 4.0, 20.0)
+      // ...
+    );
   }
 }
