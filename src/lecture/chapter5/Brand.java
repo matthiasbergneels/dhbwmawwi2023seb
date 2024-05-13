@@ -1,14 +1,18 @@
 package lecture.chapter5;
 
+import lecture.chapter7.Bookable;
+
 public enum Brand {
-    MERCEDES("$$$"),
-    TESLA("$$"),
-    FIAT("$"),
-    OPEL("$");
+    MERCEDES("$$$", "High"),
+    TESLA("$$", "Medium"),
+    FIAT("$", "Low"),
+    OPEL("$", "Medium");
 
     private String priceTag;
-    Brand(String priceTag){
+    private String quality;
+    Brand(String priceTag, String quality){
         this.priceTag = priceTag;
+        this.quality = quality;
     }
 
     public String getPriceTag(){

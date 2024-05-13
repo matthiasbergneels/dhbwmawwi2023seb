@@ -1,5 +1,7 @@
 package lecture.chapter7;
 
+import lecture.chapter8.NotEnoughFreeSlotsException;
+
 public class Hotel implements PriorityBookable{
 
   private int slots;
@@ -15,13 +17,14 @@ public class Hotel implements PriorityBookable{
   }
 
   @Override
-  public boolean book(int slots) {
-    if(freeSlots() >= slots){
-      bookedSlots += slots;
-      return true;
+  public void book(int slots) throws NotEnoughFreeSlotsException{
+
+    if(slots > freeSlots()){
+      NotEnoughFreeSlotsException notEnoughFreeSlots = new NotEnoughFreeSlotsException(slots, freeSlots());
+      throw notEnoughFreeSlots;
     }
 
-    return false;
+    bookedSlots += slots;
   }
 
   @Override
