@@ -14,7 +14,7 @@ public class OuterClass {
 
     @Override
     void printMessage(String message) {
-
+      System.out.println("Nachricht: " + message + " from " + this.getClass() + " - Identifier " + identifier);
     }
   }
 
