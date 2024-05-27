@@ -52,4 +52,13 @@ class HotelTest {
     // act & arrange
     assertThrows(NotEnoughFreeSlotsException.class, ()-> testHotel.book(55));
   }
+
+  @Test
+  void bookWithAssertionThrowsInnerAnonymousClass(){
+    // arrange
+    Hotel testHotel = new Hotel(50);
+
+    // act & arrange
+    //assertThrows(NotEnoughFreeSlotsException.class, TODO);
+  }
 }
