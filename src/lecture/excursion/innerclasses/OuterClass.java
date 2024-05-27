@@ -36,9 +36,12 @@ public class OuterClass {
   }
 
   public void printMessageFromSecondInnerLocalClass(String message){
+    String localText = "Lokaler Text aus Methode";
     class InnerLocalClass{
       public void printMessage(String message){
+        String localText = "Lokaler Text in der inneren Klasse";
         System.out.println("Nachricht: " + message + " from " + this.getClass() + " - Identifier " + identifier);
+        System.out.println("++++++" + localText + " from " + this.getClass());
       }
     }
 
@@ -74,6 +77,18 @@ public class OuterClass {
     };
 
     myInnerAnonymousClass.printMessage(message);
+  }
+
+  public void printMessageFromLambdaFunction(String message){
+    String localText = "Lokaler Text in Methode";
+
+    Printable lambdaFunction = pMessage -> {
+      //String localText = "";
+      System.out.println("Nachricht: " + pMessage + " from " + this.getClass() + " - Identifier " + identifier);
+      System.out.println(localText);
+    };
+
+    lambdaFunction.printMessage(message);
   }
 
   // InnerTopLevelClass
@@ -121,5 +136,8 @@ public class OuterClass {
     myOuterClass.printMessageFromInnerAnonymousClass(message);
 
     myOuterClass.printMessageFromInnerAnonymousClassBasedOnAbstractClass(message);
+
+    myOuterClass.printMessageFromLambdaFunction(message);
+
   }
 }
