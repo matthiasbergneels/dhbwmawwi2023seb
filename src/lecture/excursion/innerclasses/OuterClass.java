@@ -18,7 +18,10 @@ public class OuterClass {
     }
   }
 
+  private static final String CLASS_IDENTIFIER = "STATIC_CLASS_ATTRIBUTE_IDENTIFIER";
   private final int identifier;
+
+
 
   public OuterClass(int identifier){
       this.identifier = identifier;
@@ -59,6 +62,10 @@ public class OuterClass {
         counter++;
         System.out.println("Nachricht: " + message + " from " + this.getClass() + " - Identifier " + identifier + " - Counter: " + counter);
       }
+
+      public void externallyUncallableMethod(){
+        System.out.println("I can't get called externally!");
+      }
     };
 
     myInnerAnonymousClass.printMessage(message);
@@ -95,14 +102,14 @@ public class OuterClass {
   static class InnerTopLevelClass{
 
     public void printMessage(String message){
-      System.out.println("Nachricht: " + message + " from " + this.getClass());
+      System.out.println("Nachricht: " + message + " from " + this.getClass() + " - static_Identifier " + CLASS_IDENTIFIER);
     }
   }
 
   // InnerElementClass
   class InnerElementClass{
     public void printMessage(String message){
-      System.out.println("Nachricht: " + message + " from " + this.getClass() + " - Identifier " + identifier);
+      System.out.println("Nachricht: " + message + " from " + this.getClass() + " - Identifier " + identifier + " - static_Identifier " + CLASS_IDENTIFIER);
     }
   }
 
