@@ -22,6 +22,7 @@ public class ListExamples {
     myNameList.add("Monika");
     myNameList.add("Zeus");
     myNameList.add("Monika");
+    myNameList.add("Frank");
     //myNameList.add(new ArrayList());
     //myNameList.add(17);
     //myNameList.add('a');
@@ -44,13 +45,27 @@ public class ListExamples {
     // Zählerschleife -> Wahlfreier Zugriff
     System.out.println("Iteration über For-Schleife:");
     for(int i = 0; i < myNameList.size(); i++){
-      System.out.println(myNameList.get(i));
+      String currentName = myNameList.get(i);
+
+      System.out.println(currentName + " Index " + i);
+
+      /*
+      if(currentName.equals("Julius")){
+        System.out.println("Gelöscht: " + myNameList.remove(i) + " Index " + i);
+      } else {
+        System.out.println(currentName + " Index " + i);
+      }
+
+       */
     }
 
     // For-Each
     System.out.println("Iteration über For-Each-Schleife:");
     for(String currentName : myNameList){
       System.out.println(currentName);
+      if(currentName.equals("Julius")){
+        //System.out.println("Gelöscht: " + myNameList.remove(currentName)); // --> java.util.ConcurrentModificationException
+      }
     }
 
     // Iterator
@@ -58,7 +73,14 @@ public class ListExamples {
     Iterator<String> myNameListeIterator = myNameList.iterator();
     while(myNameListeIterator.hasNext()){
       String currentName = myNameListeIterator.next();
-      System.out.println(currentName);
+
+      if(currentName.equals("Julius")){
+        //System.out.println("Gelöscht: " + myNameList.remove(currentName)); // --> java.util.ConcurrentModificationException
+        System.out.println(currentName + " - wird gelöscht!");
+        myNameListeIterator.remove();
+      }else {
+        System.out.println(currentName);
+      }
     }
 
 
