@@ -2,10 +2,7 @@ package lecture.chapter9;
 
 import lecture.chapter5.Car;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 public class ListExamples {
 
@@ -23,6 +20,10 @@ public class ListExamples {
     myNameList.add("Zeus");
     myNameList.add("Monika");
     myNameList.add("Frank");
+    myNameList.add("Christian");
+    myNameList.add("Jan");
+    myNameList.add("Amadeus");
+
     //myNameList.add(new ArrayList());
     //myNameList.add(17);
     //myNameList.add('a');
@@ -84,8 +85,19 @@ public class ListExamples {
     }
 
 
+    Collections.sort(myNameList);
+
+    System.out.println("Namen in der natürlichen Ordnung:");
+    for(String currentName : myNameList) {
+      System.out.println(currentName);
+    }
 
 
+    Collections.sort(myNameList, (o1, o2) -> {return o1.length() - o2.length();});
+    System.out.println("Namen der Anzahl der Zeichen:");
+    for(String currentName : myNameList) {
+      System.out.println(currentName);
+    }
 
 
   }
