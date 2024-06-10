@@ -25,4 +25,23 @@ public class Bird extends Animal{
   public void breath() {
       System.out.println("Der Vogel " + getDescription() + "atmet!");
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if(this == obj){
+      return true;
+    }
+
+    if(!super.equals(obj)){
+      return false;
+    }
+
+    Bird a = (Bird)obj;
+
+    if(this.canFly != a.canFly){
+      return false;
+    }
+
+    return true;
+  }
 }

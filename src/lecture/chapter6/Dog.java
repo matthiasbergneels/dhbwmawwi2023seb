@@ -41,4 +41,23 @@ public final class Dog extends Animal{
   public String toString(){
     return super.toString() + ", Rasse: " + breed;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if(this == obj){
+      return true;
+    }
+
+    if(!super.equals(obj)){
+      return false;
+    }
+
+    Dog a = (Dog)obj;
+
+    if(!this.breed.equals(a.breed)){
+      return false;
+    }
+
+    return true;
+  }
 }

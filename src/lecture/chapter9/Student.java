@@ -1,9 +1,26 @@
 package lecture.chapter9;
 
+import java.util.Comparator;
+import java.util.Objects;
+
 public class Student implements Comparable<Student>{
   private int id;
   private String name;
   private String familyName;
+
+
+  public final static Comparator<Student> SORT_BY_NAME_CHARACTER_COUNT = (s1, s2) -> {
+    return (s1.familyName.length() + s1.name.length()) - (s2.familyName.length() + s2.name.length());
+  };
+
+  /*
+  public static Comparator<Student> SORT_BY_NAME_CHARACTER_COUNT = new Comparator<Student>() {
+    @Override
+    public int compare(Student o1, Student o2) {
+      return 0;
+    }
+  };
+   */
 
   public Student(int id, String name, String familyName) {
     this.id = id;
@@ -61,17 +78,19 @@ public class Student implements Comparable<Student>{
     return 0;
   }
 
+  /*
   @Override
   public boolean equals(Object obj) {
 
-    if(this == obj){
+    // Alias-Check
+    if (this == obj) {
       return true;
     }
-
-    if(obj == null){
+    // Test auf null
+    if (obj == null){
       return false;
     }
-
+    // Typverträglichkeit
     if(!(obj instanceof Student)){
       return false;
     }
@@ -91,5 +110,35 @@ public class Student implements Comparable<Student>{
     }
 
     return true;
+  }
+
+   */
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Student student = (Student) o;
+
+    if (id != student.id) return false;
+    if (!Objects.equals(name, student.name)) return false;
+      return Objects.equals(familyName, student.familyName);
+  }
+
+  /*
+  @Override
+  public int hashCode() {
+    return this.id ^ this.name.hashCode() ^ this.familyName.hashCode();
+  }
+
+   */
+
+  @Override
+  public int hashCode() {
+    int result = id;
+    result = 31 * result + (name != null ? name.hashCode() : 0);
+    result = 31 * result + (familyName != null ? familyName.hashCode() : 0);
+    return result;
   }
 }

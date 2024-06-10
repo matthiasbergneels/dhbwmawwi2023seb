@@ -77,5 +77,13 @@ public class SetExample {
       System.out.println(currentStudent);
     }
 
+    Set<Student> myStudentsByNameLength = new TreeSet<>(Student.SORT_BY_NAME_CHARACTER_COUNT);
+    myStudentsByNameLength.addAll(myStudentSet);
+
+    System.out.println("Ausgabe Studierende nach Namenslänge:");
+    for(Student currentStudent : myStudentsByNameLength){
+      System.out.println(currentStudent);
+    }
+    
   }
 }
