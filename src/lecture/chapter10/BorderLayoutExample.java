@@ -16,6 +16,9 @@ public class BorderLayoutExample extends JFrame {
     southPanel.add(new JButton("Button 1 - SOUTH"));
     southPanel.add(new JButton("Button 2 - SOUTH"));
     southPanel.add(new JButton("Button 3 - SOUTH"));
+
+
+
     mainPanel.add(southPanel, BorderLayout.SOUTH);
     mainPanel.add(new JButton("Button - EAST"), BorderLayout.EAST);
     mainPanel.add(new JButton("Button - WEST"), BorderLayout.WEST);
