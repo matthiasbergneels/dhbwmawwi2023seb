@@ -23,6 +23,8 @@ public class FlowLayoutExample extends JFrame {
 
   public static void main(String[] args) {
     new FlowLayoutExample();
+
+    System.out.println("Ende der Main-Methode");
   }
 
 }
