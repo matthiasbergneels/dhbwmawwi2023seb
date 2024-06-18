@@ -9,6 +9,31 @@ import java.text.ParseException;
 
 public class Logon extends JFrame {
 
+  static enum NetworkProtocol {
+    SSH(22),
+    SMTP(25),
+    HTTP(80),
+    FTP(21),
+    HTTPS(443);
+
+    public final int port;
+
+    NetworkProtocol(int port) {
+      this.port = port;
+    }
+
+    @Override
+    public String toString() {
+      switch(this){
+        case HTTPS:
+          return "HTTP(s):" + port;
+        default:
+          return this.name() + ":" + port;
+      }
+
+    }
+  }
+
   public Logon() throws ParseException {
     super();
     this.setTitle("Logon");
@@ -19,8 +44,8 @@ public class Logon extends JFrame {
     //this.setOpacity(0.5f);
 
     // Enumeration für ComboBox (Was für Infos wären bei Protokollen noch sinnvoll in der Enumeration?)
-    final String[] PROTOCOL_VALUE_HELP = {"FTP", "Telnet", "SMTP", "HTTP"};
-    JComboBox<String> myComboBox = new JComboBox<>(PROTOCOL_VALUE_HELP);
+    //final String[] PROTOCOL_VALUE_HELP = {"FTP", "Telnet", "SMTP", "HTTP"};
+    JComboBox<NetworkProtocol> myComboBox = new JComboBox<>(NetworkProtocol.values());
 
     JFormattedTextField portField = new JFormattedTextField(new MaskFormatter("#####"));
     portField.setColumns(3);
