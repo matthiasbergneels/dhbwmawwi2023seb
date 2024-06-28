@@ -5,10 +5,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.text.ParseException;
 
 public class Logon extends JFrame {
@@ -142,7 +139,10 @@ public class Logon extends JFrame {
     ActionListener buttonListener = e -> {
       System.out.println("Action Command: " + e.getActionCommand());
       System.out.println("Modifiers: " + e.getModifiers());
+      System.out.println("Parameter String: " + e.paramString());
       System.out.println("When (Timestamp): " + e.getWhen());
+
+
 
       if(e.getActionCommand().equals(ACTION_PRINT)){
         System.out.println("ausgewähltes Protokoll: " + myComboBox.getSelectedItem() + "; manuell gesetzte Port: " + portField.getText());
@@ -150,14 +150,60 @@ public class Logon extends JFrame {
         System.exit(0);
       }
 
+      System.out.println("Modifiers (binär): " + Integer.toBinaryString(e.getModifiers()));
+      System.out.println("Alt-Mask Modifier: " + Integer.toBinaryString(ActionEvent.ALT_MASK));
+      System.out.println("Strg-Mask Modifier: " + Integer.toBinaryString(ActionEvent.CTRL_MASK));
+
+      if((e.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK){
+        System.out.println("STRG - Taste wurde gedrückt");
+      } else {
+        System.out.println("STRG - Taste wurde NICHT gedrückt");
+      }
     };
 
+    okButton.addActionListener(buttonListener);
     printButton.addActionListener(buttonListener);
     cancelButton.addActionListener(buttonListener);
 
     southPanel.add(okButton);
     southPanel.add(cancelButton);
     southPanel.add(printButton);
+
+    MouseListener fieldListener = new MouseListener() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        System.out.println("Element geklickt + " + e.getSource());
+        System.out.println("Button: " + e.getButton());
+      }
+
+      @Override
+      public void mousePressed(MouseEvent e) {
+        System.out.println("Element gedrückt + " + e.getSource());
+      }
+
+      @Override
+      public void mouseReleased(MouseEvent e) {
+        System.out.println("Element losgelassen + " + e.getSource());
+
+      }
+
+      @Override
+      public void mouseEntered(MouseEvent e) {
+        System.out.println("Zeiger auf Element! + " + e.getSource());
+
+      }
+
+      @Override
+      public void mouseExited(MouseEvent e) {
+        System.out.println("Zeiger weg von Element! + " + e.getSource());
+      }
+    };
+
+    okButton.addMouseListener(fieldListener);
+    printButton.addMouseListener(fieldListener);
+    cancelButton.addMouseListener(fieldListener);
+    portField.addMouseListener(fieldListener);
+    myComboBox.addMouseListener(fieldListener);
 
     // create & assign Borders
     Border etchedBorder = BorderFactory.createEtchedBorder();
