@@ -53,8 +53,10 @@ public class Logon extends JFrame {
     //final String[] PROTOCOL_VALUE_HELP = {"FTP", "Telnet", "SMTP", "HTTP"};
     //JComboBox<String> myComboBox = new JComboBox<>(PROTOCOL_VALUE_HELP);
     JComboBox<NetworkProtocol> myComboBox = new JComboBox<>(NetworkProtocol.values());
+    myComboBox.setName("NETWORK_DROPDOWN_BOX");
 
     JFormattedTextField portField = new JFormattedTextField(new MaskFormatter("#####"));
+    portField.setName("PORT_INPUTFIELD");
     portField.setColumns(3);
 
     myComboBox.addItemListener(new ItemListener() {
@@ -65,7 +67,7 @@ public class Logon extends JFrame {
           System.out.println("StateChange: " + e.getStateChange());
           System.out.println("Parameter String: " + e.paramString());
 
-          portField.setText(""+((NetworkProtocol)e.getItem()).getDefaultPort());
+          portField.setText(Integer.toString(((NetworkProtocol)e.getItem()).getDefaultPort()));
         }
       }
     });
@@ -131,9 +133,12 @@ public class Logon extends JFrame {
 
     // create & assign Buttons
     JButton okButton = new JButton("Ok");
+    okButton.setName("OK_BUTTON");
     JButton cancelButton = new JButton("Beenden");
+    cancelButton.setName("CANCEL_BUTTON");
     cancelButton.setActionCommand(ACTION_CLOSE);
     JButton printButton = new JButton("Ausgabe");
+    printButton.setName("PRINT_BUTTON");
     printButton.setActionCommand(ACTION_PRINT);
 
     ActionListener buttonListener = e -> {
@@ -172,30 +177,30 @@ public class Logon extends JFrame {
     MouseListener fieldListener = new MouseListener() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        System.out.println("Element geklickt + " + e.getSource());
+        System.out.println("Element geklickt: " + ((Component)e.getSource()).getName());
         System.out.println("Button: " + e.getButton());
       }
 
       @Override
       public void mousePressed(MouseEvent e) {
-        System.out.println("Element gedrückt + " + e.getSource());
+        System.out.println("Element gedrückt: " + ((Component)e.getSource()).getName());
       }
 
       @Override
       public void mouseReleased(MouseEvent e) {
-        System.out.println("Element losgelassen + " + e.getSource());
+        System.out.println("Element losgelassen: " + ((Component)e.getSource()).getName());
 
       }
 
       @Override
       public void mouseEntered(MouseEvent e) {
-        System.out.println("Zeiger auf Element! + " + e.getSource());
+        System.out.println("Zeiger auf Element: " + ((Component)e.getSource()).getName());
 
       }
 
       @Override
       public void mouseExited(MouseEvent e) {
-        System.out.println("Zeiger weg von Element! + " + e.getSource());
+        System.out.println("Zeiger weg von Element: " + ((Component)e.getSource()).getName());
       }
     };
 
@@ -223,6 +228,45 @@ public class Logon extends JFrame {
     mainPanel.add(southPanel, BorderLayout.SOUTH);
 
     this.add(mainPanel);
+
+
+    // Swing - JMenuBar
+    JMenuBar myMenuBar = new JMenuBar();
+    JMenu fileMenu = new JMenu("Datei");
+
+    JMenuItem printMenuItem = new JMenuItem("Ausgabe");
+    printMenuItem.setActionCommand(ACTION_PRINT);
+    printMenuItem.addActionListener(buttonListener);
+    JMenuItem closeMenuItem = new JMenuItem("Schließen");
+    closeMenuItem.setActionCommand(ACTION_CLOSE);
+    closeMenuItem.addActionListener(buttonListener);
+
+    fileMenu.add(printMenuItem);
+    fileMenu.addSeparator();
+    fileMenu.add(closeMenuItem);
+
+    myMenuBar.add(fileMenu);
+    this.setJMenuBar(myMenuBar);
+
+    // AWT MenuBar
+    MenuBar myAwtMenuBar = new MenuBar();
+
+    Menu fileAwtMenu = new Menu("Datei (AWT)");
+
+    MenuItem printAwtMenuItem = new MenuItem("Ausgabe");
+    printAwtMenuItem.setActionCommand(ACTION_PRINT);
+    printAwtMenuItem.addActionListener(buttonListener);
+    MenuItem closeAwtMenuItem = new MenuItem("Schließen");
+    closeAwtMenuItem.setActionCommand(ACTION_CLOSE);
+    closeAwtMenuItem.addActionListener(buttonListener);
+
+    fileAwtMenu.add(printAwtMenuItem);
+    fileAwtMenu.addSeparator();
+    fileAwtMenu.add(closeAwtMenuItem);
+
+    myAwtMenuBar.add(fileAwtMenu);
+    this.setMenuBar(myAwtMenuBar);
+
 
     // set JFrame behavior
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
