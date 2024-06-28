@@ -5,32 +5,41 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.ParseException;
 
 public class Logon extends JFrame {
 
-  static enum NetworkProtocol {
+  private static final String ACTION_CLOSE = "ACTION_CLOSE";
+  private static final String ACTION_PRINT = "ACTION_PRINT";
+
+  static enum NetworkProtocol{
     SSH(22),
-    SMTP(25),
-    HTTP(80),
     FTP(21),
+    HTTP(80),
     HTTPS(443);
 
-    public final int port;
+    private int defaultPort;
 
-    NetworkProtocol(int port) {
-      this.port = port;
+    NetworkProtocol(int defaultPort){
+      this.defaultPort = defaultPort;
+    }
+
+    public int getDefaultPort(){
+      return defaultPort;
     }
 
     @Override
     public String toString() {
-      switch(this){
-        case HTTPS:
-          return "HTTP(s):" + port;
-        default:
-          return this.name() + ":" + port;
-      }
 
+      switch(this){
+        case HTTPS: return "HTTP(s):" + defaultPort;
+        default:
+          return super.toString() + ":" + defaultPort;
+      }
     }
   }
 
@@ -45,10 +54,26 @@ public class Logon extends JFrame {
 
     // Enumeration für ComboBox (Was für Infos wären bei Protokollen noch sinnvoll in der Enumeration?)
     //final String[] PROTOCOL_VALUE_HELP = {"FTP", "Telnet", "SMTP", "HTTP"};
+    //JComboBox<String> myComboBox = new JComboBox<>(PROTOCOL_VALUE_HELP);
     JComboBox<NetworkProtocol> myComboBox = new JComboBox<>(NetworkProtocol.values());
 
     JFormattedTextField portField = new JFormattedTextField(new MaskFormatter("#####"));
     portField.setColumns(3);
+
+    myComboBox.addItemListener(new ItemListener() {
+      @Override
+      public void itemStateChanged(ItemEvent e) {
+        if(e.getStateChange() == ItemEvent.SELECTED){
+          System.out.println("Item: " + e.getItem());
+          System.out.println("StateChange: " + e.getStateChange());
+          System.out.println("Parameter String: " + e.paramString());
+
+          portField.setText(""+((NetworkProtocol)e.getItem()).getDefaultPort());
+        }
+      }
+    });
+
+
 
     // initialize Panels
     JPanel mainPanel = new JPanel(new BorderLayout());
@@ -109,8 +134,26 @@ public class Logon extends JFrame {
 
     // create & assign Buttons
     JButton okButton = new JButton("Ok");
-    JButton cancelButton = new JButton("Schließen");
+    JButton cancelButton = new JButton("Beenden");
+    cancelButton.setActionCommand(ACTION_CLOSE);
     JButton printButton = new JButton("Ausgabe");
+    printButton.setActionCommand(ACTION_PRINT);
+
+    ActionListener buttonListener = e -> {
+      System.out.println("Action Command: " + e.getActionCommand());
+      System.out.println("Modifiers: " + e.getModifiers());
+      System.out.println("When (Timestamp): " + e.getWhen());
+
+      if(e.getActionCommand().equals(ACTION_PRINT)){
+        System.out.println("ausgewähltes Protokoll: " + myComboBox.getSelectedItem() + "; manuell gesetzte Port: " + portField.getText());
+      } else if(e.getActionCommand().equals(ACTION_CLOSE)){
+        System.exit(0);
+      }
+
+    };
+
+    printButton.addActionListener(buttonListener);
+    cancelButton.addActionListener(buttonListener);
 
     southPanel.add(okButton);
     southPanel.add(cancelButton);
