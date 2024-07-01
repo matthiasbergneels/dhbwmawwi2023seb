@@ -11,6 +11,9 @@ public class LinkedListExample {
     wordLinkedList.add("sonnigen");
     wordLinkedList.add("Tag!");
 
+
+    wordLinkedList.printList();
+
     System.out.println("Ende");
   }
 }
