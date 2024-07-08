@@ -1,17 +1,22 @@
-package lecture.chapter12;
+ package lecture.chapter12;
 
-public class LinkedList<T> {
+ import java.util.Collection;
+ import java.util.Iterator;
+ import java.util.List;
+ import java.util.ListIterator;
+
+ public class LinkedListCollectionFramework<T> implements List<T> {
 
   private Node<T> firstNode;
   private int size = 0;
 
-  public void add(T data){
+  public boolean add(T data){
     Node<T> newNode = new Node(data);
     size++;
 
     if(firstNode == null){
       firstNode = newNode;
-      return;
+      return true;
     }
 
     Node<T> currentNode = firstNode;
@@ -20,12 +25,113 @@ public class LinkedList<T> {
     }
 
     currentNode.setNextNode(newNode);
+    return true;
   }
 
-  // Laufzeitkomplexität --> O(1) konstant
+   @Override
+   public boolean containsAll(Collection<?> c) {
+     return false;
+   }
+
+   @Override
+   public boolean addAll(Collection<? extends T> c) {
+     return false;
+   }
+
+   @Override
+   public boolean addAll(int index, Collection<? extends T> c) {
+     return false;
+   }
+
+   @Override
+   public boolean removeAll(Collection<?> c) {
+     return false;
+   }
+
+   @Override
+   public boolean retainAll(Collection<?> c) {
+     return false;
+   }
+
+   @Override
+   public void clear() {
+
+   }
+
+   @Override
+   public T get(int index) {
+     return null;
+   }
+
+   @Override
+   public T set(int index, T element) {
+     return null;
+   }
+
+   @Override
+   public void add(int index, T element) {
+
+   }
+
+   @Override
+   public T remove(int index) {
+     return null;
+   }
+
+   @Override
+   public int indexOf(Object o) {
+     return 0;
+   }
+
+   @Override
+   public int lastIndexOf(Object o) {
+     return 0;
+   }
+
+   @Override
+   public ListIterator<T> listIterator() {
+     return null;
+   }
+
+   @Override
+   public ListIterator<T> listIterator(int index) {
+     return null;
+   }
+
+   @Override
+   public List<T> subList(int fromIndex, int toIndex) {
+     return null;
+   }
+
+   // Laufzeitkomplexität --> O(1) konstant
   public int size(){
     return size;
   }
+
+   @Override
+   public boolean isEmpty() {
+     return false;
+   }
+
+   @Override
+   public boolean contains(Object o) {
+     return false;
+   }
+
+   @Override
+   public Iterator<T> iterator() {
+     return null;
+   }
+
+   @Override
+   public Object[] toArray() {
+     return new Object[0];
+   }
+
+   @Override
+   public <T1> T1[] toArray(T1[] a) {
+     return null;
+   }
 
   /* Laufzeitkopmplexität --> O(n) linear
   public int size(){
@@ -43,7 +149,7 @@ public class LinkedList<T> {
   }
    */
 
-  public boolean remove(T data){
+  public boolean remove(Object data){
     // TODO: löschen eines bestimmten Daten-Elements (erste, welches in der Liste vorkommt!)
     if(firstNode == null){
       return false;
@@ -116,4 +222,16 @@ public class LinkedList<T> {
     }
   }
 
+  class LinkedListIterator implements Iterator<T>{
+
+    @Override
+    public boolean hasNext() {
+      return false;
+    }
+
+    @Override
+    public T next() {
+      return null;
+    }
+  }
 }

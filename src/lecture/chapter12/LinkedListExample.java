@@ -14,6 +14,8 @@ public class LinkedListExample {
 
     wordLinkedList.printList();
 
+    wordLinkedList.printListRecursive();
+
     System.out.println("Ende");
   }
 }
