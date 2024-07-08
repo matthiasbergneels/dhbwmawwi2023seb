@@ -61,14 +61,62 @@ public class BinaryTree<T extends Comparable<T>> {
   }
 
   public boolean contains(T data){
-    // TODO: element finden im Baum
-    // equals
-    return true;
+    if(root == null){
+      return false;
+    }
+    return contains(root, data);
+  }
+
+  private boolean contains(Node<T> currentNode, T data){
+    if(currentNode.getData().equals(data)){
+      return true;
+    }
+
+    if(currentNode.getData().compareTo(data) < 0){
+      if(currentNode.getRightNode() != null){
+        return contains(currentNode.getRightNode(), data);
+      }
+    } else if(currentNode.getData().compareTo(data) > 0){
+      if(currentNode.getLeftNode() != null){
+        return contains(currentNode.getLeftNode(), data);
+      }
+    }
+
+    return false;
   }
 
   public void print(){
-    // TODO: Ausgabe aller Daten - von klein nach groß aufsteigend
+    if(root == null){
+      System.out.println("Baum ist leer");
+      return;
+    }
+
+    printInOrder(root);
   }
+
+  // in-order-Traversierung --> left - current - right
+  private void printInOrder(Node<T> currentNode){
+    if(currentNode.getLeftNode() != null){
+      printInOrder(currentNode.getLeftNode());
+    }
+
+    System.out.println(currentNode.getData());
+
+    if(currentNode.getRightNode() != null){
+      printInOrder(currentNode.getRightNode());
+    }
+  }
+
+  // pre-order-Traversierung --> current-left-right
+  public void printPreOrder(){
+    // TODO
+  }
+
+  // post-order-Traversierung --> left-right-current
+  public void printPostOrder(){
+    // TODO
+  }
+
 
   private class Node<T>{
 
