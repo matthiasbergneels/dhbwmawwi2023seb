@@ -60,6 +60,16 @@ public class BinaryTree<T extends Comparable<T>> {
     return false;
   }
 
+  public boolean contains(T data){
+    // TODO: element finden im Baum
+    // equals
+    return true;
+  }
+
+  public void print(){
+    // TODO: Ausgabe aller Daten - von klein nach groß aufsteigend
+  }
+
   private class Node<T>{
 
     private T data;
