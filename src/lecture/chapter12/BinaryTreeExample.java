@@ -18,6 +18,8 @@ public class BinaryTreeExample {
     System.out.println("Enthält Harald: " + myTree.contains("Harald"));
 
     myTree.print();
+    myTree.printPreOrder();
+    myTree.printPostOrder();
 
     System.out.println("Ende");
   }

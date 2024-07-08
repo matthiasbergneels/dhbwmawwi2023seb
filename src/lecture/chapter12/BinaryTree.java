@@ -91,6 +91,7 @@ public class BinaryTree<T extends Comparable<T>> {
       return;
     }
 
+    System.out.println("In-Order-Ausgabe:");
     printInOrder(root);
   }
 
@@ -109,14 +110,48 @@ public class BinaryTree<T extends Comparable<T>> {
 
   // pre-order-Traversierung --> current-left-right
   public void printPreOrder(){
-    // TODO
+    if(root == null){
+      System.out.println("Baum ist leer");
+      return;
+    }
+    System.out.println("Pre-Order-Ausgabe:");
+    printPreOrder(root);
+  }
+
+  private void printPreOrder(Node<T> currentNode){
+    System.out.println(currentNode.getData());
+
+    if(currentNode.getLeftNode() != null){
+      printPreOrder(currentNode.getLeftNode());
+    }
+
+    if(currentNode.getRightNode() != null){
+      printPreOrder(currentNode.getRightNode());
+    }
   }
 
   // post-order-Traversierung --> left-right-current
   public void printPostOrder(){
-    // TODO
+    if(root == null){
+      System.out.println("Baum ist leer");
+      return;
+    }
+
+    System.out.println("Post-Order-Ausgabe:");
+    printPostOrder(root);
   }
 
+  private void printPostOrder(Node<T> currentNode){
+    if(currentNode.getLeftNode() != null){
+      printPostOrder(currentNode.getLeftNode());
+    }
+
+    if(currentNode.getRightNode() != null){
+      printPostOrder(currentNode.getRightNode());
+    }
+
+    System.out.println(currentNode.getData());
+  }
 
   private class Node<T>{
 
