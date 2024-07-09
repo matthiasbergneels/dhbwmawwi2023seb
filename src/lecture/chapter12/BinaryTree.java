@@ -153,7 +153,44 @@ public class BinaryTree<T extends Comparable<T>> {
     System.out.println(currentNode.getData());
   }
 
-  private class Node<T>{
+  // Level-Order-Traversierung --> Level von oben nach unten und rechts nach links
+  void printLevelOrder() {
+    record LevelNode(int level, Node node){
+
+    }
+
+    if(root == null){
+      System.out.println("Baum ist leer");
+      return;
+    }
+
+    System.out.println("Level-Order-Ausgabe:");
+
+    int currentLevel = 0;
+    Queue<LevelNode> queue = new Queue<>();
+    queue.enqueue(new LevelNode(1, root));
+
+    while (!queue.isEmpty()) {
+      LevelNode currentLevelNode = queue.dequeue();
+      if(currentLevel != currentLevelNode.level()){
+        System.out.println();
+        System.out.print(++currentLevel);
+      }
+
+      System.out.print(" - " + currentLevelNode.node().data);
+
+      if (currentLevelNode.node().getLeftNode() != null) {
+        queue.enqueue(new LevelNode(currentLevel + 1, currentLevelNode.node().getLeftNode()));
+      }
+
+      if (currentLevelNode.node().getRightNode() != null) {
+        queue.enqueue(new LevelNode(currentLevel + 1, currentLevelNode.node().getRightNode()));
+      }
+    }
+    System.out.println();
+  }
+
+  private static class Node<T>{
 
     private T data;
     private Node<T> leftNode;

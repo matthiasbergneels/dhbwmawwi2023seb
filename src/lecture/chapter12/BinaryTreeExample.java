@@ -8,11 +8,16 @@ public class BinaryTreeExample {
 
     BinaryTree<String> myTree = new BinaryTree<>();
 
-    myTree.add("Hallo");
+    myTree.add("Hanno");
     myTree.add("Fritz");
     myTree.add("Gabi");
     myTree.add("Helmut");
     myTree.add("Dorothea");
+    myTree.add("Zeus");
+    myTree.add("Harald");
+    myTree.add("Michael");
+    myTree.add("Anton");
+    myTree.add("Benjamin");
 
     System.out.println("Enthält Fritz: " + myTree.contains("Fritz"));
     System.out.println("Enthält Harald: " + myTree.contains("Harald"));
@@ -20,6 +25,7 @@ public class BinaryTreeExample {
     myTree.print();
     myTree.printPreOrder();
     myTree.printPostOrder();
+    myTree.printLevelOrder();
 
     System.out.println("Ende");
   }
