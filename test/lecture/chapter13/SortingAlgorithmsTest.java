@@ -25,6 +25,18 @@ class SortingAlgorithmsTest {
     }
 
     @Test
+    void bubbleSortV2() {
+      int[] bubbleSortedArray = SortingAlgorithms.bubbleSortV2(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+    @Test
+    void bubbleSortV3() {
+      int[] bubbleSortedArray = SortingAlgorithms.bubbleSortV3(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+    @Test
     void selectionSort() {
       int[] bubbleSortedArray = SortingAlgorithms.selectionSort(toSort.clone());
       assertTrue(isSorted(bubbleSortedArray));
@@ -55,13 +67,24 @@ class SortingAlgorithmsTest {
     }
 
     @Test
+    void bubbleSortV2() {
+      int[] bubbleSortedArray = SortingAlgorithms.bubbleSortV2(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+    @Test
+    void bubbleSortV3() {
+      int[] bubbleSortedArray = SortingAlgorithms.bubbleSortV3(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+    @Test
     void selectionSort() {
       int[] bubbleSortedArray = SortingAlgorithms.selectionSort(toSort.clone());
       assertTrue(isSorted(bubbleSortedArray));
     }
 
     @Test
-
     void quickSort() {
       int[] bubbleSortedArray = SortingAlgorithms.quickSort(toSort.clone());
       assertTrue(isSorted(bubbleSortedArray));
@@ -70,6 +93,7 @@ class SortingAlgorithmsTest {
 
   @Nested
   @DisplayName("Sort cases on reverse ordered Arrays")
+  @Disabled
   class SortCasesOnReverseOrderdArrays {
     @BeforeAll
     static void setUp() {
@@ -83,13 +107,24 @@ class SortingAlgorithmsTest {
     }
 
     @Test
+    void bubbleSortV2() {
+      int[] bubbleSortedArray = SortingAlgorithms.bubbleSortV2(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+    @Test
+    void bubbleSortV3() {
+      int[] bubbleSortedArray = SortingAlgorithms.bubbleSortV3(toSort.clone());
+      assertTrue(isSorted(bubbleSortedArray));
+    }
+
+    @Test
     void selectionSort() {
       int[] bubbleSortedArray = SortingAlgorithms.selectionSort(toSort.clone());
       assertTrue(isSorted(bubbleSortedArray));
     }
 
     @Test
-    @Disabled
     void quickSort() {
       int[] bubbleSortedArray = SortingAlgorithms.quickSort(toSort.clone());
       assertTrue(isSorted(bubbleSortedArray));

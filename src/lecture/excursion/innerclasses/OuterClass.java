@@ -41,7 +41,10 @@ public class OuterClass {
   public void printMessageFromSecondInnerLocalClass(String message){
     String localText = "Lokaler Text aus Methode";
     class InnerLocalClass{
+
+      private int count = 0;
       public void printMessage(String message){
+        count++;
         String localText = "Lokaler Text in der inneren Klasse";
         System.out.println("Nachricht: " + message + " from " + this.getClass() + " - Identifier " + identifier);
         System.out.println("++++++" + localText + " from " + this.getClass());
@@ -50,6 +53,7 @@ public class OuterClass {
 
     InnerLocalClass myInnerLocalClass = new InnerLocalClass();
     myInnerLocalClass.printMessage(message);
+    System.out.println(myInnerLocalClass.count);
   }
 
   public void printMessageFromInnerAnonymousClass(String message){
@@ -108,7 +112,10 @@ public class OuterClass {
 
   // InnerElementClass
   class InnerElementClass{
+
+    private int count = 0;
     public void printMessage(String message){
+      count++;
       System.out.println("Nachricht: " + message + " from " + this.getClass() + " - Identifier " + identifier + " - static_Identifier " + CLASS_IDENTIFIER);
     }
   }
@@ -130,6 +137,7 @@ public class OuterClass {
     myInnerTopLevelClass.printMessage(message);
 
     OuterClass.InnerElementClass myInnerElementClassInstanceOne = myOuterClass.new InnerElementClass();
+    System.out.println(myInnerElementClassInstanceOne.count);
     myInnerElementClassInstanceOne.printMessage(message);
 
     OuterClass.InnerElementClass myInnerElementClassInstanceTwo = myOuterClassTwo.new InnerElementClass();
